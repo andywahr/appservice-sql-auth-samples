@@ -8,6 +8,16 @@ using Newtonsoft.Json.Serialization;
 
 namespace Dotnetcore
 {
+    public class LoggingConfig
+    {
+        public LogLevelConfig LogLevel { get; set; }
+    }
+
+    public class LogLevelConfig
+    {
+        public string Default { get; set; } 
+    }
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -20,7 +30,8 @@ namespace Dotnetcore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            IConfigurationBuilder configBuilder = new ConfigurationBuilder().AddJsonFile("appsettings.json", optional: false, reloadOnChange: false).AddEnvironmentVariables();
+            IConfigurationBuilder configBuilder = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: false).AddEnvironmentVariables();
 
             var config = configBuilder.Build();
 

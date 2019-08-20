@@ -1,6 +1,7 @@
 ﻿using Dotnetcore.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Services.AppAuthentication;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
@@ -12,16 +13,19 @@ namespace Dotnetcore.Controllers
     public class ValuesController : ControllerBase
     {
         private Models.Configuration configuration;
+        private ILogger<ValuesController> _logger;
 
-        public ValuesController(Models.Configuration config)
+        public ValuesController(Models.Configuration config, ILogger<ValuesController> logger)
         {
             configuration = config;
+            _logger = logger;
         }
 
         // GET api/values
         [HttpGet]
         public async Task<IEnumerable<ValueModel>> Get()
         {
+            _logger.LogInformation("I am here");
             List<ValueModel> retVal = new List<ValueModel>();
 
             string connStr = configuration.ConnectionStrings.AuthTest;

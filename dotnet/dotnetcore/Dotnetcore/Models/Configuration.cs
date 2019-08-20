@@ -2,6 +2,7 @@
 {
     public class Configuration
     {
+        public LoggingConfig Logging { get; set; }
         public ConnectionStrings ConnectionStrings { get; set; }
     }
 
